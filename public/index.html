@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Talk | Node.js Interactive 2016 | Math in V8 is Broken and How We Can Fix It</title>
+
+	<meta name="description" content="The built-in JavaScript Math library is used in virtually every Node.js application, from generating random ids to calculating exponential back-off times to computing basic performance metrics. When using the Math library, most developers simply assume that the underlying implementations are accurate, performant, and correctly implemented. In this presentation, I discuss why this assumption is often false and show the various ways in which the standard library is broken. The presentation will present the algorithms used, their performance and accuracy, and how they have downstream effects on users of these libraries. The presentation concludes by highlighting how community solutions are stepping up to fix these problems and identity opportunities for additional improvements.">
+	<meta name="author" content="Athan Reines">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/white.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="css/code/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script src="js/lib/reveal/pdf.js"></script>
+
+	<!--[if lt IE 9]>
+	<script src="js/lib/reveal/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section data-background="img/conf_logo_medium.jpg">
+				<aside class="notes">
+
+				</aside>
+			</section>
+
+			<section class="center">
+				<!-- <h1>Node.js Interactive 2016</h1> -->
+				<h3>Math in V8 is Broken and How We Can Fix It</h3>
+				<p>
+					<small><a href="https://github.com/kgryte"><i class="fa fa-github"></i> Athan Reines</a> / <a href="https://twitter.com/kgryte"><i class="fa fa-twitter"></i> @kgryte</a></small>
+				</p>
+
+				<aside class="notes">
+					<p>
+						Hi! My name is Athan Reines.
+					</p>
+					<p>
+						I am here today because
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>&nbsp;</h2>
+
+				<aside class="notes">
+
+				</aside>
+			</section>
+
+
+
+			<section>
+				<!-- Add blank slide to separate main presentation from appendix -->
+				<aside class="notes">
+					Intentionally left blank.
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>Appendix</h2>
+			</section>
+
+			<section class="center">
+				<!-- Intentionally many lines -->
+				<pre><code class="hljs javascript" contenteditable>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</code></pre>
+				<aside class="notes">
+					Slide for code editing.
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>What can be done at the specification level?</h2>
+
+				<aside class="notes">
+
+				</aside>
+			</section>
+
+			<section class="center">
+				<ul>
+					<li class="fragment">
+						<a href="https://developer.mozilla.org/en-US/docs/Mozilla/js-ctypes/js-ctypes_reference/Int64">Int64</a> (and bitwise ops)
+					</li>
+					<li class="fragment">
+						<a href="http://wiki.ecmascript.org/doku.php?id=harmony:typed_objects">Typed Objects</a>
+					</li>
+					<li class="fragment">
+						<a href="https://en.wikipedia.org/wiki/WebCL">WebCL</a>
+					</li>
+					<li class="fragment">
+						<a href="https://hacks.mozilla.org/2014/10/introducing-simd-js/">SIMD (long)</a>
+					</li>
+					<li class="fragment">
+						<a href="http://www.2ality.com/2013/12/paralleljs.html">Parallel Computing</a>
+					</li>
+					<li class="fragment">
+						<a href="http://www.2ality.com/2011/12/fake-operator-overloading.html">Operator Overloading</a>
+					</li>
+					<li class="fragment">
+						<a href="https://medium.com/javascript-scene/why-we-need-webassembly-an-interview-with-brendan-eich-7fb2a60b0723#.8cos1ynh1">Web Assembly</a>
+					</li>
+				</ul>
+
+				<aside class="notes">
+					<ul>
+						<li>Counting things, 64bit IDs which are not strings, money,...</li>
+						<li>Efficient serialization</li>
+						<li>GPGPU</li>
+						<li>Current support is for short SIMD, which is good for games and image processing, but less so for large vectors.</li>
+						<li>Lightweight threading model (similar to Go), rather than IPC</li>
+						<li>Allows for more compact syntax (MATLAB)</li>
+						<li>While most of the time, coding algos in JS should suffice, a compilation target for performance critical code will be awesome to have.</li>
+					</ul>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>Integer Support</h2>
+				<ul>
+					<li>
+						<a href="https://esdiscuss.org/topic/efficient-64-bit-arithmetic#content-7">discussion</a>
+					</li>
+					<li>
+						<a href="https://gist.github.com/BrendanEich/4294d5c212a6d2254703">gist</a>
+					</li>
+					<li>
+						<a href="http://www.r-bloggers.com/r-in-a-64-bit-world/">Int64 in R</a>
+					</li>
+				</ul>
+			</section>
+
+			<section class="center">
+				<h2>Typed Objects</h2>
+				<ul>
+					<li>
+						<a href="https://github.com/dslomov/typed-objects-es7">spec</a>
+					</li>
+					<li>
+						<a href="https://github.com/nikomatsakis/typed-objects-explainer/">explainer</a>
+					</li>
+					<li>
+						<a href="http://dave.cheney.net/2014/06/07/five-things-that-make-go-fast">typed data structures in Go</a>
+					</li>
+				</ul>
+			</section>
+
+			<section class="center">
+				<h2>WebCL</h2>
+				<ul>
+					<li>
+						<a href="https://github.com/mikeseven/node-opencl">node-opencl</a>
+					</li>
+			</section>
+
+			<section class="center">
+				<h2>SIMD</h2>
+				<ul>
+					<li>
+						<a href="https://github.com/tc39/ecmascript_simd/blob/master/src/ecmascript_simd.js">polyfill</a>
+					</li>
+					<li>
+						<a href="https://01.org/blogs/tlcounts/2014/bringing-simd-javascript">Intel announcement</a>
+					</li>
+					<li>
+						<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SIMD">MDN</a>
+					</li>
+					<li>
+						<a href="https://docs.google.com/presentation/d/1MY9NHrHmL7ma7C8dyNXvmYNNGgVmmxXk8ZIiQtPlfH4/edit#slide=id.p19">presentation</a>
+					</li>
+				</ul>
+			</section>
+
+			<section class="center">
+				<h2>Parallel Computing</h2>
+				<ul>
+					<li>
+						<a href="https://en.wikipedia.org/wiki/Data_parallelism">Data parallelism</a>
+					</li>
+					<li>
+						<a href="https://en.wikipedia.org/wiki/Task_parallelism">Task parallelism</a>
+					</li>
+					<li>
+						<a href="http://smallcultfollowing.com/babysteps/blog/2012/01/09/parallel-javascript/">Scheduler</a>
+					</li>
+					<li>
+						<a href="http://preshing.com/20120612/an-introduction-to-lock-free-programming/">Lock-free programming</a>
+					</li>
+					<li>
+						<a href="https://github.com/lars-t-hansen/ecmascript_sharedmem/blob/master/TUTORIAL.md">Shared Memory Web Workers</a>
+					</li>
+				</ul>
+			</section>
+
+			<section class="center">
+				<h2>Operator Overloading</h2>
+				<ul>
+					<li>
+						<a href="https://github.com/kushal-likhi/operator-overloading-js">operator-overloading-js</a>
+					</li>
+					<li>
+						<a href="http://scratchdisk.com/posts/operator-overloading">paper.js</a>
+					</li>
+					<li>
+						<a href="https://github.com/paperjs/paper.js/blob/master/src/core/PaperScript.js">paper.js source</a>
+					</li>
+				</ul>
+			</section>
+
+			<section class="center">
+				<h2>The End</h2>
+			</section>
+
+		</div>
+
+	</div>
+
+	<script src="js/lib/reveal/head.min.js"></script>
+	<script src="js/lib/reveal/reveal.js"></script>
+	<script src="js/lib/reveal/init.js"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "name": "talk-nodejs-interactive-2016",
+  "version": "0.0.0",
+  "description": "Talk for Node.js Interactive North America 2016",
+  "author": {
+    "name": "Athan Reines",
+    "email": "kgryte@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Athan Reines",
+      "email": "kgryte@gmail.com"
+    }
+  ],
+  "scripts": {
+    "test": "tape \"./test/*.js\"",
+    "test-cov": "istanbul cover --dir ./reports/coverage --report lcov tape -- \"./test/*.js\"",
+    "coverage": "istanbul cover --dir ./reports/codecov/coverage --report lcovonly tape -- \"./test/*.js\" && cat ./reports/codecov/coverage/lcov.info | codecov && rm -rf ./reports/codecov"
+  },
+  "main": "./lib",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kgryte/talks-nodejs-interactive-2016.git"
+  },
+  "keywords": [
+		"talk",
+		"nodejs",
+		"interactive",
+		"slides",
+		"presentation"
+	],
+  "bugs": {
+    "url": "https://github.com/kgryte/talks-nodejs-interactive-2016/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jshint": "2.x.x",
+    "jshint-stylish": "2.x.x"
+  },
+  "license": "MIT"
+}

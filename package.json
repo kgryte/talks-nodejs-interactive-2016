@@ -13,7 +13,7 @@
     }
   ],
   "scripts": {},
-  "main": "./lib",
+  "main": "",
   "repository": {
     "type": "git",
     "url": "git://github.com/kgryte/talks-nodejs-interactive-2016.git"

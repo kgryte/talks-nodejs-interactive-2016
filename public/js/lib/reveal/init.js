@@ -1,10 +1,12 @@
+/* global hljs, Reveal */
+
 (function() {
 	'use strict';
 
 	/**
-	* FUNCTION: checkClassList()
-	*	Checks if browser environment supports classList.
+	* Checks if browser environment supports classList.
 	*
+	* @private
 	* @returns {Boolean} boolean indicating if classList is supported
 	*/
 	function checkClassList() {
@@ -12,10 +14,9 @@
 	}
 
 	/**
-	* FUNCTION: initHighlightJS()
-	*	Initialize the code highlight library once dependency is loaded.
+	* Initialize the code highlight library once dependency is loaded.
 	*
-	* @returns {Void}
+	* @private
 	*/
 	function initHighlightJS() {
 		hljs.initHighlightingOnLoad();

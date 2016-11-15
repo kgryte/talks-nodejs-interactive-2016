@@ -36,38 +36,289 @@
 
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
-			<section data-background="img/conf_logo_medium.jpg">
+			<section data-background="img/title_slide_bkgd.jpg">
 				<aside class="notes">
 
 				</aside>
 			</section>
 
-			<section class="center">
-				<!-- <h1>Node.js Interactive 2016</h1> -->
-				<h3>Math in V8 is Broken and How We Can Fix It</h3>
+			<section class="center" id="title-slide-part-1">
+				<h1>Math in V8 is Broken</h1>
 				<p>
 					<small><a href="https://github.com/kgryte"><i class="fa fa-github"></i> Athan Reines</a> / <a href="https://twitter.com/kgryte"><i class="fa fa-twitter"></i> @kgryte</a></small>
 				</p>
 
 				<aside class="notes">
 					<p>
-						Hi! My name is Athan Reines.
+						Hi! I am Athan Reines.
 					</p>
 					<p>
-						I am here today because
+						I am here today to talk about Math.
 					</p>
 				</aside>
 			</section>
 
 			<section class="center">
-				<h2>&nbsp;</h2>
+				<h2>Standard Library</h1>
+
+				<aside class="notes">
+					<p>
+						What is in the JavaScript standard Math library?
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>ES5</h2>
+
+				<div class="row">
+					<ul class="fragment column column-3">
+						<li>acos</li>
+						<li>asin</li>
+						<li>atan</li>
+						<li>atan2</li>
+						<li>cos</li>
+						<li>sin</li>
+						<li>tan</li>
+					</ul>
+					<ul class="fragment column column-3">
+						<li>abs</li>
+						<li>exp</li>
+						<li>log (ln)</li>
+						<li>pow</li>
+						<li>sqrt</li>
+					</ul>
+					<ul class="fragment column column-3">
+						<li>ceil</li>
+						<li>floor</li>
+						<li>round</li>
+					</ul>
+					<ul class="fragment column column-2">
+						<li>max</li>
+						<li>min</li>
+						<li>random</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+					<ul>
+						<li>18 functions</li>
+					</ul>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>ES5</h2>
+
+				<div class="row">
+					<div class="column column-4">&nbsp;</div>
+					<ul class="column column-3">
+						<li>E</li>
+						<li>LN2</li>
+						<li>LN10</li>
+						<li>LOG2E</li>
+					</ul>
+					<ul class="column column-3">
+						<li>LOG10E</li>
+						<li>PI</li>
+						<li>SQRT1_2</li>
+						<li>SQRT2</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+					<ul>
+						<li>8 constants</li>
+					</ul>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>ES2015/ES6</h2>
+
+				<div class="row">
+					<ul class="fragment column column-3">
+						<li>acosh</li>
+						<li>asinh</li>
+						<li>atanh</li>
+						<li>cosh</li>
+						<li>sinh</li>
+						<li>tanh</li>
+					</ul>
+					<ul class="fragment column column-3">
+						<li>sign</li>
+						<li>cbrt</li>
+						<li>expm1</li>
+						<li>log10</li>
+						<li>log1p</li>
+						<li>log2</li>
+					</ul>
+					<ul class="fragment column column-3">
+						<li>fround</li>
+						<li>trunc</li>
+					</ul>
+					<ul class="fragment column column-2">
+						<li>clz32</li>
+						<li>hypot</li>
+						<li>imul</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+					<ul>
+						<li>17 functions</li>
+					</ul>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>Comparison</h1>
+
+				<aside class="notes">
+					<p>
+						Compare the JavaScript standard Math library to another language.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>Golang</h2>
+
+				<div class="row">
+					<ul class="fragment column column-3">
+						<li>Abs</li>
+						<li>Acosh</li>
+						<li>Asin</li>
+						<li>Asinh</li>
+						<li>Atan</li>
+						<li>Atan2</li>
+						<li>Atanh</li>
+						<li>Cbrt</li>
+						<li>Ceil</li>
+						<li>Copysign</li>
+					</ul>
+					<ul class="fragment column column-3">
+						<li>Cos</li>
+						<li>Cosh</li>
+						<li>Dim</li>
+						<li>Erf</li>
+						<li>Erfc</li>
+						<li>Exp</li>
+						<li>Exp2</li>
+						<li>Expm1</li>
+						<li>Float32bits</li>
+						<li>Float64bits</li>
+					</ul>
+					<ul class="fragment column column-3">
+						<li>Floor</li>
+						<li>Frexp</li>
+						<li>Gamma</li>
+						<li>Hypot</li>
+						<li>Ilogb</li>
+						<li>J0</li>
+						<li>J1</li>
+						<li>Jn</li>
+						<li>Ldexp</li>
+						<li>Lgamma</li>
+					</ul>
+					<ul class="fragment column column-2">
+						<li>Log</li>
+						<li>Log10</li>
+						<li>Log1p</li>
+						<li>Log2</li>
+						<li>Logb</li>
+						<li>Max</li>
+						<li>Min</li>
+						<li>Mod</li>
+						<li>Modf</li>
+						<li>Nextafter</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+					<ul>
+						<li></li>
+					</ul>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>Golang</h2>
+
+				<div class="row">
+					<ul class="fragment column column-3">
+						<li>NextAfter32</li>
+						<li>Pow</li>
+						<li>Pow10</li>
+						<li>Signbit</li>
+						<li>Sin</li>
+						<li>Sincos</li>
+						<li>Sinh</li>
+						<li>Sqrt</li>
+						<li>Tan</li>
+						<li>Tanh</li>
+					</ul>
+					<ul class="fragment column column-3">
+						<li>Trunc</li>
+						<li>Y0</li>
+						<li>Y1</li>
+						<li>Yn</li>
+						<li>ExpFloat64</li>
+						<li>Float64</li>
+						<li>Int</li>
+						<li>Int63</li>
+						<li>NormFloat64</li>
+						<li>Perm</li>
+					</ul>
+					<ul class="fragment column column-3">
+						<li>Uint32</li>
+						<li>Zipf</li>
+						<li>(Complex)</li>
+						<li>(Big)</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+					<ul>
+						<li>match c stdlib equivalents</li>
+						<li>54 functions</li>
+						<li>8+ PRNGs</li>
+						<li>Complex: both 64bit and 128bit</li>
+					</ul>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>Bugs</h1>
+
+				<aside class="notes">
+					<p>
+						Bugs.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>Node v0.10</h1>
 
 				<aside class="notes">
 
 				</aside>
 			</section>
 
+			<section class="center">
+				<pre><code class="hljs javascript" contenteditable>
+sin(-0) == 0      // wrong (IEEE 754)
+NaN == NaN        // distinguishable NaNs
+				</code></pre>
 
+				<aside class="notes">
+					<ul>
+						<li>Sine is an odd function.</li>
+						<li>On some Windows systems, can manipulate the bit sequence within typed arrays to generate a distinguishable NaN.</li>
+					</ul>
+				</aside>
+			</section>
 
 			<section>
 				<!-- Add blank slide to separate main presentation from appendix -->

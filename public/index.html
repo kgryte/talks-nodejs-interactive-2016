@@ -50,10 +50,13 @@
 
 				<aside class="notes">
 					<p>
-						Hi! I am Athan Reines.
+						Hi! Thank you for coming to this talk.
 					</p>
 					<p>
-						I am here today to talk about Math.
+						I am here today to talk about math. I should not that, while the title of this talk explicitly mentions V8, much of the content applies to other JavaScript engines, as well. And further, the concept that math is broken extends beyond any particular engine and also includes JavaScript at the specification level.
+					</p>
+					<p>
+						Without further ado...
 					</p>
 				</aside>
 			</section>
@@ -63,7 +66,10 @@
 
 				<aside class="notes">
 					<p>
-						What is in the JavaScript standard Math library?
+						The JavaScript standard library is often a developer's first introduction to math in JavaScript and its math functions are commonly used in JavaScript applications.
+					</p>
+					<p>
+						To review...
 					</p>
 				</aside>
 			</section>
@@ -101,13 +107,13 @@
 				</div>
 
 				<aside class="notes">
-					<ul>
-						<li>18 functions</li>
-					</ul>
+					<p>
+						In ES5, the standard math library consisted of 18 functions and 8 constants. These functions can be categorized as trigonometric, other special functions, including rounding, and miscellaneous, including a PRNG.
+					</p>
 				</aside>
 			</section>
 
-			<section class="center">
+			<!-- <section class="center">
 				<h2>ES5</h2>
 
 				<div class="row">
@@ -131,7 +137,7 @@
 						<li>8 constants</li>
 					</ul>
 				</aside>
-			</section>
+			</section> -->
 
 			<section class="center">
 				<h2>ES2015/ES6</h2>
@@ -158,16 +164,19 @@
 						<li>trunc</li>
 					</ul>
 					<ul class="fragment column column-2">
-						<li>clz32</li>
 						<li>hypot</li>
+						<li>clz32</li>
 						<li>imul</li>
 					</ul>
 				</div>
 
 				<aside class="notes">
-					<ul>
-						<li>17 functions</li>
-					</ul>
+					<p>
+						ES2015/ES6 added 17 more functions to the standard math library. Again, these functions are broken down into trigonometric, other special functions, including rounding, and miscellaneous.
+					</p>
+					<p>
+						The addition of these 17 functions means the JavaScript standard math library has 35 functions.
+					</p>
 				</aside>
 			</section>
 
@@ -176,7 +185,7 @@
 
 				<aside class="notes">
 					<p>
-						Compare the JavaScript standard Math library to another language.
+						For comparison, let us compare the JavaScript standard Math library to another language.
 					</p>
 				</aside>
 			</section>
@@ -236,9 +245,9 @@
 				</div>
 
 				<aside class="notes">
-					<ul>
-						<li></li>
-					</ul>
+					<p>
+						Once again, we find trigonometric functions, various other special functions, and lower level functions for manipulating and generating floating-point numbers.
+					</p>
 				</aside>
 			</section>
 
@@ -279,12 +288,9 @@
 				</div>
 
 				<aside class="notes">
-					<ul>
-						<li>match c stdlib equivalents</li>
-						<li>54 functions</li>
-						<li>8+ PRNGs</li>
-						<li>Complex: both 64bit and 128bit</li>
-					</ul>
+					<p>
+						In total, the Golang standard math library has 54 functions (JS has 35), 8+ PRNGs, as well as support for 64-bit and 128-bit complex numbers. Notably, Golang has equivalents for most C/C++ standard math library functions.
+					</p>
 				</aside>
 			</section>
 

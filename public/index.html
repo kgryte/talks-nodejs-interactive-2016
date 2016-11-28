@@ -53,7 +53,7 @@
 						Hi! Thank you for coming to this talk.
 					</p>
 					<p>
-						I am here today to talk about math. I should not that, while the title of this talk explicitly mentions V8, much of the content applies to other JavaScript engines, as well. And further, the concept that math is broken extends beyond any particular engine and also includes JavaScript at the specification level.
+						I am here today to talk about math. I should note that, while the title of this talk explicitly mentions V8, much of the content applies to other JavaScript engines, as well. And further, the concept that math is broken extends beyond any particular engine and also includes JavaScript at the specification level.
 					</p>
 					<p>
 						Without further ado...
@@ -512,7 +512,7 @@ var x = Math.pow( 10, 308 ); // => 1.0000000000000006e+308
 
 				<aside class="notes">
 					<p>
-						Admittedly, the error is only 3 ulp; however, those 3 ulp matter. Inaccurate results for integer inputs a) is counterintuitive because 10**308 is exactly representable (so not the same counterintuitive as 0.1 + 0.2 != 0.3) and b) ends up causing downstream accuracy issues for higher order mathematical functions as we discovered while writing such functions.
+						Admittedly, the error is only 3 ulp; however, those 3 ulp matter. Inaccurate results for integer inputs a) is counterintuitive because 10**308 is representable as a double (so not the same counterintuitive as 0.1 + 0.2 != 0.3) and b) ends up causing downstream accuracy issues for higher order mathematical functions as we discovered while writing such functions.
 					</p>
 					<p>
 						See V8 issues <a href="https://bugs.chromium.org/p/v8/issues/detail?id=3599">3599</a> and <a href="https://bugs.chromium.org/p/v8/issues/detail?id=5157">5157</a>.
@@ -525,19 +525,19 @@ var x = Math.pow( 10, 308 ); // => 1.0000000000000006e+308
 
 				<pre><code class="hljs javascript" contenteditable>
 function pow( x, y ) {
-	var m = x;
-	var n = y;
-	var p = 1;
-	while ( n !== 0 ) {
-		if ( ( n & 1 ) !== 0 ) {
-			p *= m;
-		}
-		m *= m;
-		if ( ( n & 2 ) !== 0 ) {
-			p *= m;
-		}
-		m *= m;
-		n >>= 2;
+    var m = x;
+    var n = y;
+    var p = 1;
+    while ( n !== 0 ) {
+        if ( ( n & 1 ) !== 0 ) {
+            p *= m;
+        }
+        m *= m;
+        if ( ( n & 2 ) !== 0 ) {
+            p *= m;
+        }
+        m *= m;
+        n >>= 2;
     }
     return p;
 }
@@ -545,13 +545,13 @@ function pow( x, y ) {
 
 				<aside class="notes">
 					<p>
-						The reason for the imprecision is the fastpow algorithm used for speed. If you were to log each iteration of the while loop, you would discover that results start going awry by the third iteration.
+						If we examine the algorithm used to perform exponentiation for integer inputs, the reason for the imprecision becomes evident. If you were to log each iteration of the while loop, you would discover that results start going awry by the third iteration due to error accumulation.
 					</p>
 					<p>
-						Why not just use an accurate pow algorithm? Because a rigorous pow algorithm is complex, involving a fair amount of special cases and floating-point number bit manipulation.
+						So why did implementers opt for this algorithm over a more accurate pow algorithm? The reason is because a rigorous pow algorithm is complex, involving a fair amount of special cases and low-level floating-point bit manipulation.
 					</p>
 					<p>
-						While one may argue that the current implementation is not without benefit, I would argue that such an implementation should not be the default implementation. The complexity is not for the sake of complexity, but because of the considerable effort needed to compute accurate results. And those accurate results are needed by downstream consumers. Otherwise, anyone who builds on top of Math.pow must sacrifice accuracy and perform various adjustments to ensure results "match" reference implementations.
+						So why does a more accurate pow algorithm matter? The complexity is not for the sake of complexity. Considerable effort is needed to compute accurate results. And those accurate results are needed by downstream consumers. Otherwise, anyone who builds on top of Math.pow must sacrifice accuracy and perform various adjustments to ensure results "match" reference implementations.
 					</p>
 				</aside>
 			</section>

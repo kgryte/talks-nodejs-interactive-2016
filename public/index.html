@@ -409,22 +409,36 @@
 			</section>
 
 			<section class="center">
-				<h2>Node v0.10</h1>
+				<h2 class="no-text-transform">Math.sin</h2>
+				<pre><code class="hljs javascript" contenteditable>
+var x = Math.pow( 2, 120 ); // => 1.329227995784916e+36
+var y = Math.sin( x );      // => -0.8783788442551665
+
+// Expected: 0.377820109360752
+				</code></pre>
+				<div class="row">
+					<ul class="fragment column column-3">
+						<li>Node v0.10</li>
+					</ul>
+				</div>
 
 				<aside class="notes">
-
+					<p>
+						For certain values, Math.sin returns inaccurate results.
+					</p>
+					<p>
+						Who does it affect? Node version 0.10.
+					</p>
 				</aside>
 			</section>
 
 			<section class="center">
 				<pre><code class="hljs javascript" contenteditable>
-sin(-0) == 0      // wrong (IEEE 754)
 NaN == NaN        // distinguishable NaNs
 				</code></pre>
 
 				<aside class="notes">
 					<ul>
-						<li>Sine is an odd function.</li>
 						<li>On some Windows systems, can manipulate the bit sequence within typed arrays to generate a distinguishable NaN. See also <a href="https://github.com/tc39/ecma262/issues/635">"Canonical NaNs"</a> and <a href="https://github.com/ljharb/get-nans/blob/master/index.js">get-nans</a></li>
 					</ul>
 				</aside>

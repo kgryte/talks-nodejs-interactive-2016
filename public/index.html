@@ -903,6 +903,53 @@ function randomString( length ) {
 				</aside>
 			</section>
 
+			<section class="center">
+				<h2 class="no-text-transform">Polyfills</h2>
+
+				<pre class="fragment"><code class="hljs javascript" contenteditable>
+var isFinite = require( 'is-finite' );
+
+module.exports = function asinh( x ) {
+    if ( x === 0 || !isFinite( x ) ) {
+        return x;
+    }
+    return x < 0 ? -asinh( -x ) : Math.log( x + Math.sqrt( x*x + 1 ) );
+}
+				</code></pre>
+				<aside class="notes">
+					<p>
+						Maybe you are thinking you can just polyfill all the problematic math functions. Wrong.
+					</p>
+					<p>
+						If this implementation looks familiar, you are correct. The implementation is the same as we saw earlier.
+					</p>
+					<p>
+						Unfortunately, many of the "polyfills" (and "ponyfills") are written by people who, quite frankly, have no business publishing such packages. Some of these polyfills are even written by "highly regarded" members of the community, giving the implementations an air of legitimacy, when, in fact, they are low quality implementations.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2 class="no-text-transform">Libraries</h2>
+
+				<pre class="fragment"><code class="hljs javascript" contenteditable>
+function asinh( x ) {
+  return Math.log( Math.sqrt( x*x + 1 ) + x );
+}
+				</code></pre>
+				<aside class="notes">
+					<p>
+						Okay. So maybe you are thinking you can use a popular math library. Surely a highly popular dedicated math library will have good implementations! Wrong.
+					</p>
+					<p>
+						Look familiar? This implementation is lifted directly from a highly popular (nearly 4000 stars, >150 watching, >50 contributors) JavaScript math library.
+					</p>
+					<p>
+						Lesson: social indicators are poor proxies for evaluating numeric computing libraries. Most JavaScript math libraries that you can find on npm are low or very low quality. The only reliable way to evaluate code quality is to READ THE SOURCE! Do your research: always know what you are buying!
+					</p>
+				</aside>
+			</section>
+
 			<section>
 				<!-- Add blank slide to separate main presentation from appendix -->
 				<aside class="notes">

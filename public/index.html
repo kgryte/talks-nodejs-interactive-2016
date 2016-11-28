@@ -409,12 +409,18 @@
 			</section>
 
 			<section class="center">
-				<h2 class="no-text-transform">Math.sin</h2>
+				<h2 class="no-text-transform">Math.sin/Math.cos</h2>
 				<pre><code class="hljs javascript" contenteditable>
-var x = Math.pow( 2, 120 ); // => 1.329227995784916e+36
-var y = Math.sin( x );      // => -0.8783788442551665
+var x = Math.pow( 2, 120 );
+// returns 1.329227995784916e+36
 
-// Expected: 0.377820109360752
+var y = Math.sin( x );
+// returns: -0.8783788442551665
+// expected: 0.377820109360752
+
+y = Math.cos( x );
+// returns:   0.47796506772457525
+// expected: -0.9258790228548378
 				</code></pre>
 				<div class="row">
 					<ul class="fragment column column-3">
@@ -428,6 +434,9 @@ var y = Math.sin( x );      // => -0.8783788442551665
 					</p>
 					<p>
 						Who does it affect? Node version 0.10.
+					</p>
+					<p>
+						See V8 issues <a href="https://bugs.chromium.org/p/v8/issues/detail?id=3006">3006</a> and <a href="https://bugs.chromium.org/p/v8/issues/detail?id=3089">3089</a>.
 					</p>
 				</aside>
 			</section>

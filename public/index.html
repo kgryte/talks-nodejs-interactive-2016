@@ -753,6 +753,82 @@ var y = Math.exp( 100.0 );
 			</section>
 
 			<section class="center">
+				<h2 class="no-text-transform">Math.random</h2>
+				<pre class="fragment"><code class="hljs c" contenteditable>
+uint32_t state0 = 1;
+uint32_t state1 = 2;
+uint32_t mwc1616() {
+  state0 = 18030 * (state0 & 0xffff) + (state0 >> 16);
+  state1 = 30903 * (state1 & 0xffff) + (state1 >> 16);
+  return state0 << 16 + (state1 & 0xffff);
+}
+				</code></pre>
+
+				<div class="fragment row">
+					<ul class="column column-3">
+						<li>Node v0.10</li>
+					</ul>
+					<ul class="column column-3">
+						<li>Node v0.12</li>
+					</ul>
+					<ul class="column column-3">
+						<li>Node v4</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+					<p>
+						MWC1616: multiply-with-carry combining two 16-bit parts.
+					</p>
+					<p>
+						Issues:
+						<ul>
+							<li>Outdated version of a low-quality PRNG.</li>
+							<li>Limited number of distinct values: 2**32.</li>
+							<li>The more significant bits are almost entirely dependent on state0</li>
+							<li>Vulnerable to a poorly chosen initial state.</li>
+							<li>Fails many of the statistical tests used to evaluate PRNGs</li>
+						</ul>
+					</p>
+					<p>
+						See also <a href="https://medium.com/@betable/tifu-by-using-math-random-f1c308c4fd9d#.qf3db54rs">Betable post</a> and <a href="http://v8project.blogspot.com/2015/12/theres-mathrandom-and-then-theres.html">V8 follow-up</a>.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2 class="no-text-transform">Example</h2>
+				<pre class="fragment"><code class="hljs javascript" contenteditable>
+var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+
+function randomString( length ) {
+    var randint;
+    var str;
+    var i;
+
+    str = '';
+    for ( i = 0; i < length; i++ ) {
+        randint = Math.floor( Math.random() * ALPHABET.length );
+        str += ALPHABET.substring( randint, randint+1 );
+    }
+    return str;
+}
+				</code></pre>
+				<aside class="notes">
+					<p>
+						Why does having a good PRNG matter? Consider this function which is designed to generate a random string. If you do the math, the function should be capable of generating 2**132 different 22 character strings, which means the possibility of a collision is approximately nil.
+					</p>
+					<p>
+						However, note how the random integer is generated. We floor the result of multiplying a pseudorandom number on the interval [0,1) by the length, thus throwing away the less significant bits.
+						Consequently, we end up relying on ONLY the top 6 bits of the PRNG output. In which case, the number of possible 22 character strings is less than 2**30, and the possibility of a collision is consequently much greater.
+					</p>
+					<p>
+						 Note, if you need a robust PRNG for generating pseudorandom integers, DO NOT do this. While common, this approach more often than not leads to biased results.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
 				<h2 class="no-text-transform">JavaScript</h2>
 
 				<aside class="notes">

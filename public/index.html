@@ -673,7 +673,7 @@ function asinh( x ) {
 
 				<aside class="notes">
 					<p>
-						If we examine the algorithm for Math.asinh, we see that the implementation consists of a single approximation for ALL input values.
+						If we examine the algorithm for Math.asinh, we see that the implementation consists of a single approximation for ALL input values. For small values, becomes log(1) which is 0. For large values, squaring x overflows.
 					</p>
 					<p>
 						For other ES2015/ES6 implementations in V8 prior to Node v7, see the <a href="https://github.com/nodejs/node/blob/v6.x/deps/v8/src/js/math.js">source</a>.
@@ -718,7 +718,7 @@ function asinh( x ) {
 
 				<aside class="notes">
 					<p>
-						Compare to FDLIBM.
+						Compare to FDLIBM. In this algorithm, we do not treat all input values the same; instead, we apply different approximations based on magnitude, leading to more accurate results.
 					</p>
 				</aside>
 			</section>

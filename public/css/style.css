@@ -50,3 +50,7 @@
 #title-slide-part-1 h1 {
 	text-transform: none!important;
 }
+
+.reveal .no-text-transform {
+	text-transform: none!important;
+}

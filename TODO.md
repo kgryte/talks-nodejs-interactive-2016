@@ -1,4 +1,4 @@
 # TODO
 
 * Slide showing `exp` precision plots
-* Add specification level critiques
+* Add slide on polyfills: read the source!

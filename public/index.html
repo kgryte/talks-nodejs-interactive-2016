@@ -504,6 +504,12 @@ var x = Math.pow( 10, 308 ); // => 1.0000000000000006e+308
 // Expected: 1.0e+308
 				</code></pre>
 
+				<div class="fragment row">
+					<ul class="column column-6">
+						<li>All Node versions</li>
+					</ul>
+				</div>
+
 				<aside class="notes">
 					<p>
 						Admittedly, the error is only 3 ulp; however, those 3 ulp matter. Inaccurate results for integer inputs a) is counterintuitive because 10**308 is exactly representable (so not the same counterintuitive as 0.1 + 0.2 != 0.3) and b) ends up causing downstream accuracy issues for higher order mathematical functions as we discovered while writing such functions.
@@ -522,7 +528,7 @@ function pow( x, y ) {
 	var m = x;
 	var n = y;
 	var p = 1;
-    while ( n !== 0 ) {
+	while ( n !== 0 ) {
 		if ( ( n & 1 ) !== 0 ) {
 			p *= m;
 		}

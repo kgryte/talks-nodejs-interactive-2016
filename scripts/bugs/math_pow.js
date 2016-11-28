@@ -15,7 +15,7 @@ function pow( x, y ) {
 	var m = x;
 	var n = y;
 	var p = 1;
-    while ( n !== 0 ) {
+	while ( n !== 0 ) {
 		if ( ( n & 1 ) !== 0 ) {
 			p *= m;
 		}

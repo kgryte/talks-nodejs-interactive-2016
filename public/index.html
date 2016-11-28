@@ -422,8 +422,9 @@ y = Math.cos( x );
 // returns:   0.47796506772457525
 // expected: -0.9258790228548378
 				</code></pre>
-				<div class="row">
-					<ul class="fragment column column-3">
+
+				<div class="fragment row">
+					<ul class="column column-3">
 						<li>Node v0.10</li>
 					</ul>
 				</div>
@@ -561,6 +562,97 @@ function pow( x, y ) {
 					</p>
 					<p>
 						So why does a more accurate pow algorithm matter? The complexity is not for the sake of complexity. Considerable effort is needed to compute accurate results. And those accurate results are needed by downstream consumers. Otherwise, anyone who builds on top of Math.pow must sacrifice accuracy and perform various adjustments to ensure results "match" reference implementations.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2 class="no-text-transform">Math.atanh</h2>
+				<pre><code class="hljs javascript" contenteditable>
+var y = Math.atanh( 1.0e-10 );
+// returns:  1.000000082640371e-10
+// expected: 1.0e-10
+				</code></pre>
+				<div class="fragment row">
+					<ul class="column column-3">
+						<li>Node v0.12</li>
+					</ul>
+					<ul class="column column-3">
+						<li>Node v4</li>
+					</ul>
+					<ul class="column column-3">
+						<li>Node v6</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+					<p>
+						For certain values, Math.atanh returns inaccurate results. Fixed in Node v7.
+					</p>
+					<p>
+						See V8 issue <a href="https://bugs.chromium.org/p/v8/issues/detail?id=3511">3511</a>.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2 class="no-text-transform">Math.acosh</h2>
+				<pre><code class="hljs javascript" contenteditable>
+var y = Math.acosh( 1.0 + 1.0e-10 );
+// returns:  0.000014142136208733941
+// expected: 0.000014142136208675862
+				</code></pre>
+				<div class="fragment row">
+					<ul class="column column-3">
+						<li>Node v0.12</li>
+					</ul>
+					<ul class="column column-3">
+						<li>Node v4</li>
+					</ul>
+					<ul class="column column-3">
+						<li>Node v6</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+					<p>
+						For certain values, Math.acosh returns inaccurate results. Fixed in Node v7.
+					</p>
+					<p>
+						See V8 issue <a href="https://bugs.chromium.org/p/v8/issues/detail?id=3509">3509</a>.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2 class="no-text-transform">Math.asinh</h2>
+				<pre><code class="hljs javascript" contenteditable>
+var y = Math.asinh( 1.0e-50 );
+// returns:  0.0
+// expected: 1.0e-50
+
+y = Math.asinh( 1.0e200 );
+// returns   +infinity
+// expected: 461.2101657793691
+				</code></pre>
+				<div class="fragment row">
+					<ul class="column column-3">
+						<li>Node v0.12</li>
+					</ul>
+					<ul class="column column-3">
+						<li>Node v4</li>
+					</ul>
+					<ul class="column column-3">
+						<li>Node v6</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+					<p>
+						For certain values, Math.asinh returns inaccurate results. Fixed in Node v7.
+					</p>
+					<p>
+						See V8 issue <a href="https://bugs.chromium.org/p/v8/issues/detail?id=3496">3496</a>.
 					</p>
 				</aside>
 			</section>

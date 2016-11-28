@@ -481,7 +481,7 @@ console.log( '%d|%d and %d|%d', int11, int12, int21, int22 );
 						The existence of distinguishable NaNs is not necessarily a bad thing. The IEEE 754 specification discusses use cases, and, if you review older numeric computing libraries, you will see prevalent use of signaling and non-signaling NaNs. However, most developers are more than likely not aware that NaN values are not canonicalized on write (for reasons of performance). And that lack of awareness is a potential source of bugs.
 					</p>
 					<p>
-						On some Windows systems and Node v0.10, can manipulate the bit sequence within typed arrays to generate a distinguishable NaN, where `NaN == NaN`.
+						Note, also, that, on some Windows systems and Node v0.10, you can manipulate the bit sequence within typed arrays to generate a distinguishable NaN, where `NaN == NaN`.
 					</p>
 					<p>
 						See also <a href="https://github.com/tc39/ecma262/issues/635">"Canonical NaNs"</a> and <a href="https://github.com/ljharb/get-nans/blob/master/index.js">get-nans</a>.

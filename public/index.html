@@ -657,6 +657,35 @@ y = Math.asinh( 1.0e200 );
 				</aside>
 			</section>
 
+			<section class="center">
+				<h2 class="no-text-transform">Math.exp</h2>
+				<pre><code class="hljs javascript" contenteditable>
+var y = Math.exp( 100.0 );
+// returns:  2.6881171418161485e+43
+// expected: 2.6881171418161356e+43
+				</code></pre>
+				<div class="fragment row">
+					<ul class="column column-3">
+						<li>Node v0.12</li>
+					</ul>
+					<ul class="column column-3">
+						<li>Node v4</li>
+					</ul>
+					<ul class="column column-3">
+						<li>Node v6</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+					<p>
+						Error of 26 ulp. For many values, Math.exp returns inaccurate results. Regression in Node v0.12. Fixed in Node v7.
+					</p>
+					<p>
+						See V8 issue <a href="https://bugs.chromium.org/p/v8/issues/detail?id=3468">3468</a>.
+					</p>
+				</aside>
+			</section>
+
 			<section>
 				<!-- Add blank slide to separate main presentation from appendix -->
 				<aside class="notes">

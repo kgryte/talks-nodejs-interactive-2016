@@ -311,7 +311,7 @@
 						And because of their importance and widespread use, ensuring that basic math functions are performant and accurate is critical. If these functions are not accurate, their errors propagate through downstream consumers and inevitably lead to significant deviations from expected results.
 					</p>
 					<p>
-						And speaking of errors, let us now turn our attention to bugs...
+						And speaking of errors...
 					</p>
 				</aside>
 			</section>
@@ -322,6 +322,88 @@
 				<aside class="notes">
 					<p>
 						Bugs.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2>V8 and Node</h2>
+
+				<table>
+					<tr>
+						<th>Node</th>
+						<th>EOL</th>
+						<th>V8</th>
+						<th>Release</th>
+					</tr>
+					<tr>
+						<td>0.10.44</td>
+						<td>10-2016</td>
+						<td>3.14.5.9</td>
+						<td>05-2013</td>
+					</tr>
+					<tr>
+						<td>0.12.17</td>
+						<td>01-2017</td>
+						<td>3.28.71.19</td>
+						<td>11-2014</td>
+					</tr>
+					<!-- <tr>
+						<td>1.8.4</td>
+						<td>N/A</td>
+						<td>4.1.0.27</td>
+						<td>03-2015</td>
+					</tr>
+					<tr>
+						<td>2.5.0</td>
+						<td>N/A</td>
+						<td>4.2.77.21</td>
+						<td>05-2015</td>
+					</tr>
+					<tr>
+						<td>3.3.1</td>
+						<td>N/A</td>
+						<td>4.4.63.30</td>
+						<td>08-2015</td>
+					</tr> -->
+					<tr>
+						<td>4.6.2</td>
+						<td>04-2018</td>
+						<td>4.5.103.42</td>
+						<td>08-2015</td>
+					</tr>
+					<tr>
+						<td>5.12.0</td>
+						<td>07-2016</td>
+						<td>4.6.85.32</td>
+						<td>11-2015</td>
+					</tr>
+					<tr>
+						<td>6.9.1</td>
+						<td>04-2018</td>
+						<td>5.1.281.84</td>
+						<td>07-2016</td>
+					</tr>
+					<tr>
+						<td>7.2.0</td>
+						<td>07-2017</td>
+						<td>5.4.500.43</td>
+						<td>11-2016</td>
+					</tr>
+				</table>
+
+				<aside class="notes">
+					<p>
+						To set the stage, the provided table shows, for each Node version, the underlying V8 engine. Note that this table is not fixed. Node versions having the same major version may include different versions of V8, as Node.js maintainers pull in updated V8 versions.
+					</p>
+					<p>
+						Of particular interest is the fact that a V8 version has a relatively long life due to its association with Node. For instance, by the time Node v4 reaches its end-of-life in 2018, the associated V8 engine will be more than two years old. Accordingly, any bug fixes and enhancements which happen during the interim (e.g., in V8 versions 5 and later) will not be present in Node v4. And given that Node versions find use long after they have been EOL'd, bugs may linger for many years to come.
+					</p>
+					<p>
+						In short: old bugs are still bugs.
+					</p>
+					<p>
+						With this in mind...
 					</p>
 				</aside>
 			</section>

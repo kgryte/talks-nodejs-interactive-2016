@@ -798,7 +798,8 @@ uint32_t mwc1616() {
 
 			<section class="center">
 				<h2 class="no-text-transform">Example</h2>
-				<pre class="fragment"><code class="hljs javascript" contenteditable>
+				<div class="fragment">
+					<pre><code class="hljs javascript" contenteditable>
 var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
 function randomString( length ) {
@@ -813,7 +814,14 @@ function randomString( length ) {
     }
     return str;
 }
-				</code></pre>
+					</code></pre>
+
+					<div class="row">
+						<p class="column column-9">&nbsp;</p>
+						<p class="column column-3"><a href="https://medium.com/@betable/tifu-by-using-math-random-f1c308c4fd9d">Betable</a></p>
+					</div>
+				</div>
+
 				<aside class="notes">
 					<p>
 						Why does having a good PRNG matter? Consider this function which is designed to generate a random string. If you do the math, the function should be capable of generating 2**132 different 22 character strings, which means the possibility of a collision is approximately nil.
@@ -824,6 +832,25 @@ function randomString( length ) {
 					</p>
 					<p>
 						 Note, if you need a robust PRNG for generating pseudorandom integers, DO NOT do this. While common, this approach more often than not leads to biased results.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<div class="row">
+					<div class="column column-12">
+						<a href="http://v8project.blogspot.com/2015/12/theres-mathrandom-and-then-theres.html"><img src="img/math_random.png" alt="Math.random" class="undecorated"></a>
+					</div>
+				</div>
+
+				<div class="row">
+					<p class="column column-9">&nbsp;</p>
+					<p class="column column-3"><a href="http://v8project.blogspot.com/2015/12/theres-mathrandom-and-then-theres.html">V8 blog</a></p>
+				</div>
+
+				<aside class="notes">
+					<p>
+						Just to re-emphasize the non-randomness of Math.random, here is the before and after when the V8 team switched from MWC1616 to xorshift. Note the considerable structure apparent in the before image compared to the after image. One of the hallmarks of a good PRNG is the appearance of randomness. The Math.random implementation in Node versions 4 and earlier clearly fails in this regard.
 					</p>
 				</aside>
 			</section>

@@ -833,6 +833,9 @@ function randomString( length ) {
 					<p>
 						 Note, if you need a robust PRNG for generating pseudorandom integers, DO NOT do this. While common, this approach more often than not leads to biased results.
 					</p>
+					<p>
+						See <a href="http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript">Stack Overflow</a> for another example of how Math.random is used: generating UUIDs. Also, note that Math.random is not cryptographically secure; see <a href="https://blog.securityevaluators.com/hacking-the-javascript-lottery-80cc437e3b7f#.acvos6ihg">Hacking the JavaScript Lottery</a>.
+					</p>
 				</aside>
 			</section>
 
